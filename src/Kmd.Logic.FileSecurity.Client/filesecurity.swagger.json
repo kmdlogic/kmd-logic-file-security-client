@@ -1,0 +1,201 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "KMD Logic File Security Service API"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/certificates": {
+      "post": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Creates/Uploads a certificate for a specific subscription.",
+        "operationId": "SaveCertificates",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the certificate.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificate",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "certificatePassword",
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CreateCertificateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
+    "/subscriptions/{subscriptionId}/certificates/{certificateId}": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get details of the requested certificate managed by a subscrition.",
+        "operationId": "GetCertificates",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the certificate.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "certificateId",
+            "in": "path",
+            "description": "Identifier of the certificate to fetch.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CertificateResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Delete requested certificate managed by a subscrition.",
+        "operationId": "DeleteCertificates",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the certificate.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "certificateId",
+            "in": "path",
+            "description": "Identifier of the certificate to delete.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateCertificateResponse": {
+      "type": "object",
+      "properties": {
+        "certificateId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "CertificateResponse": {
+      "type": "object",
+      "properties": {
+        "certificateId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "name": "Authorization",
+      "in": "header",
+      "type": "apiKey",
+      "description": "Standard Authorization header using the Bearer scheme. <b>Example: \"bearer {token}\".</b> You can obtain that value from your browser Developer tools"
+    }
+  }
+}
