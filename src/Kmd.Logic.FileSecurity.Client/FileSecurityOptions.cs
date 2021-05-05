@@ -13,11 +13,11 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <remarks>
         /// This option should not be overridden except for testing purposes.
         /// </remarks>
-        public Uri FileSecurityServiceUri { get; set; } = new Uri("https://gateway.kmdlogic.io/file-security/v2");
+        public Uri FileSecurityServiceUri { get; set; } = new Uri("https://gateway.kmdlogic.io/file-security/v1");
 
         /// <summary>
         /// Gets or sets the Logic Subscription.
         /// </summary>
-        public Guid? SubscriptionId { get; set; }
+        public Guid SubscriptionId { get; set; }
     }
 }
