@@ -61,6 +61,50 @@ namespace Kmd.Logic.FileSecurity.Client
             }
         }
 
+        /// <summary>
+        /// Get certificate
+        /// </summary>
+        /// <param name="certificateId"></param>
+        /// <returns></returns>
+        public async Task<CertificateResponse> GetCertificate(Guid certificateId)
+        {
+            var client = this.CreateClient();
+
+            using (var certificateDetailsResponse = await client.GetCertificatesWithHttpMessagesAsync(
+                 this._options.SubscriptionId,
+                 certificateId).ConfigureAwait(false))
+            {
+                switch (certificateDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return certificateDetailsResponse.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        return null;
+
+                    default:
+                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete certificate
+        /// </summary>
+        /// <param name="certificateId"></param>
+        /// <returns></returns>
+        public async Task<HttpResponseMessage> DeleteCertificate(Guid certificateId)
+        {
+            var client = this.CreateClient();
+
+            using (var certificateDetailsResponse = await client.DeleteCertificatesWithHttpMessagesAsync(
+                 this._options.SubscriptionId,
+                 certificateId).ConfigureAwait(false))
+            {
+                return certificateDetailsResponse.Response;
+            }
+        }
+
         internal InternalClient CreateClient()
         {
             if (this._internalClient != null)
