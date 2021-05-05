@@ -80,7 +80,7 @@ namespace Kmd.Logic.FileSecurity.Client
                         return certificateDetailsResponse.Body;
 
                     case System.Net.HttpStatusCode.NotFound:
-                        return null;
+                        throw new FileSecurityException($"Certificate with Id {certificateId} not found");
 
                     default:
                         throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
