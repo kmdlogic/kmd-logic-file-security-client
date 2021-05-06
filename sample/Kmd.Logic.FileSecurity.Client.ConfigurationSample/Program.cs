@@ -8,8 +8,15 @@ using System.Threading.Tasks;
 
 namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
 {
+    /// <summary>
+    /// Sample class to use the client.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Main method to start the sample.
+        /// </summary>
+        /// <param name="args">Array of arguments.</param>
         public static async Task Main(string[] args)
         {
             InitLogger();
