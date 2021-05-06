@@ -3,30 +3,36 @@
 namespace Kmd.Logic.FileSecurity.Client.ServiceMessages
 {
     /// <summary>
-    /// This class will be used as certificate data to be created using FileSecurityClient.cs
+    /// This class will be used as certificate data to be created using FileSecurityClient.cs.
     /// </summary>
     public class CreateCertificateRequestDetails
     {
         /// <summary>
-        /// Name of the certificate
+        /// Gets name of the certificate.
         /// </summary>
         public string Name { get; }
 
         /// <summary>
-        /// Memory stream of certificate to be uploaded
+        /// Gets memory stream of certificate to be uploaded.
         /// </summary>
         public Stream Certificate { get; }
 
         /// <summary>
-        /// Certificate password
+        /// Gets certificate password.
         /// </summary>
         public string CertificatePassword { get; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateCertificateRequestDetails"/> class.
+        /// </summary>
+        /// <param name="name">Name of certificate.</param>
+        /// <param name="certificate">Stream of certificate file.</param>
+        /// <param name="certificatePassword">Password to use the certificate.</param>
         public CreateCertificateRequestDetails(string name, Stream certificate, string certificatePassword)
         {
-            Name = name;
-            Certificate = certificate;
-            CertificatePassword = certificatePassword;
+            this.Name = name;
+            this.Certificate = certificate;
+            this.CertificatePassword = certificatePassword;
         }
     }
 }
