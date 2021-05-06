@@ -37,11 +37,11 @@ namespace Kmd.Logic.FileSecurity.Client
         /// </summary>
         /// <param name="createCertificateRequestDetails">CreateCertificateRequestDetails.</param>
         /// <returns>CreateCertificateResponse.</returns>
-        public async Task<CreateCertificateResponse> CreateCertificate(CreateCertificateRequestDetails createCertificateRequestDetails)
+        public async Task<CertificateResponse> CreateCertificate(CreateCertificateRequestDetails createCertificateRequestDetails)
         {
             var client = this.CreateClient();
 
-            using var certificateDetailsResponse = await client.SaveCertificatesWithHttpMessagesAsync(
+            using var certificateDetailsResponse = await client.CreateCertificatesWithHttpMessagesAsync(
                  this.options.SubscriptionId,
                  createCertificateRequestDetails.Name,
                  createCertificateRequestDetails.Certificate,
