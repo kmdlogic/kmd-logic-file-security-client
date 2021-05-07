@@ -10,7 +10,7 @@ To allow products using the Logic platform to use File Security in order to crea
 ## Getting started in ASP.NET Core
 
 To use this library in an ASP.NET Core application, 
-add a reference to the [Kmd.Logic.Identity.FileSecurity](https://www.nuget.org/packages/Kmd.Logic.FileSecurity.Client/1.0.0) nuget package, 
+add a reference to the [Kmd.Logic.Identity.FileSecurity](https://www.nuget.org/packages/Kmd.Logic.FileSecurity.Client) nuget package, 
 and add a reference to the [Kmd.Logic.Identity.Authorization](https://www.nuget.org/packages/Kmd.Logic.Identity.Authorization) nuget package.
 
 
