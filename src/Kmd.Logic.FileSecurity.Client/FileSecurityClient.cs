@@ -35,13 +35,13 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <summary>
         /// Creates certificate.
         /// </summary>
-        /// <param name="createCertificateRequestDetails">CreateCertificateRequestDetails.</param>
+        /// <param name="createCertificateRequestDetails">Certificate details to be created.</param>
         /// <returns>CreateCertificateResponse.</returns>
-        public async Task<CreateCertificateResponse> CreateCertificate(CreateCertificateRequestDetails createCertificateRequestDetails)
+        public async Task<CertificateResponse> CreateCertificate(CertificateRequestDetails createCertificateRequestDetails)
         {
             var client = this.CreateClient();
 
-            using var certificateDetailsResponse = await client.SaveCertificatesWithHttpMessagesAsync(
+            using var certificateDetailsResponse = await client.CreateCertificatesWithHttpMessagesAsync(
                  this.options.SubscriptionId,
                  createCertificateRequestDetails.Name,
                  createCertificateRequestDetails.Certificate,
@@ -53,6 +53,34 @@ namespace Kmd.Logic.FileSecurity.Client
 
                 case System.Net.HttpStatusCode.NotFound:
                     return null;
+
+                default:
+                    throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+            }
+        }
+
+        /// <summary>
+        /// Updates certificate.
+        /// </summary>
+        /// <param name="updateCertificateRequestDetails">Certficate details to be updated.</param>
+        /// <returns>CertificateResponse.</returns>
+        public async Task<CertificateResponse> UpdateCertificate(CertificateRequestDetails updateCertificateRequestDetails)
+        {
+            var client = this.CreateClient();
+
+            using var certificateDetailsResponse = await client.UpdateCertificatesWithHttpMessagesAsync(
+                 this.options.SubscriptionId,
+                 updateCertificateRequestDetails.Id,
+                 updateCertificateRequestDetails.Name,
+                 updateCertificateRequestDetails.Certificate,
+                 updateCertificateRequestDetails.CertificatePassword).ConfigureAwait(false);
+            switch (certificateDetailsResponse?.Response?.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return certificateDetailsResponse.Body;
+
+                case System.Net.HttpStatusCode.NotFound:
+                    throw new FileSecurityException($"Certificate with Id {updateCertificateRequestDetails.Id} not found");
 
                 default:
                     throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
