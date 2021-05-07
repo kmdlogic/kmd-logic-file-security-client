@@ -2,9 +2,11 @@
 
 namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
 {
-    public class FileSecurityDetails
+    public class CertificateDetails
     {
-        // The preconfigured File security Certificate Id
+        /// <summary>
+        /// The preconfigured File security Certificate Id.
+        /// </summary>
         public Guid CertificateId { get; set; }
     }
 }

@@ -57,21 +57,23 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 return;
             }
 
-            using var httpClient = new HttpClient();
-            using var tokenProviderFactory = new LogicTokenProviderFactory(configuration.TokenProvider);
-            var fileSecurityClient = new FileSecurityClient(httpClient, tokenProviderFactory, configuration.FileSecurity);
-            var certificateId = configuration.FileSecurityDetails.CertificateId;
-
-            Log.Information("Fetching File Security details for certificate id {CertificateId} ", configuration.FileSecurityDetails.CertificateId);
-            var result = await fileSecurityClient.GetCertificate(certificateId).ConfigureAwait(false);
-            
-            if (result == null)
+            using (var httpClient = new HttpClient())
+            using (var tokenProviderFactory = new LogicTokenProviderFactory(configuration.TokenProvider))
             {
-                Log.Error("Invalid File Security certificate id {Id}", configuration.FileSecurityDetails.CertificateId);
-                return;
-            }
+                var fileSecurityClient = new FileSecurityClient(httpClient, tokenProviderFactory, configuration.FileSecurityOptions);
+                var certificateId = configuration.CertificateDetails.CertificateId;
 
-            Console.WriteLine("Certificate ID: {0} \nCertificate Name: {1}\nSubscription ID : {2}", result.CertificateId, result.Name, result.SubscriptionId);
+                Log.Information("Fetching certificate details for certificate id {CertificateId} ", configuration.CertificateDetails.CertificateId);
+                var result = await fileSecurityClient.GetCertificate(certificateId).ConfigureAwait(false);
+
+                if (result == null)
+                {
+                    Log.Error("Invalid certificate id {Id}", configuration.CertificateDetails.CertificateId);
+                    return;
+                }
+
+                Console.WriteLine("Certificate ID: {0} \nCertificate Name: {1}\nSubscription ID : {2}", result.CertificateId, result.Name, result.SubscriptionId);
+            }
         }
     }
 }

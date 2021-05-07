@@ -3,6 +3,9 @@ using System;
 
 namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
 {
+    /// <summary>
+    /// Class to validate configuration details.
+    /// </summary>
     internal class ConfigurationValidator
     {
         private readonly AppConfiguration _configuration;
@@ -25,7 +28,7 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 return false;
             }
 
-            if (this._configuration.FileSecurity?.SubscriptionId == null)
+            if (this._configuration.FileSecurityOptions?.SubscriptionId == null)
             {
                 Log.Error(
                     "Invalid configuration. FileSecurity must have a configured SubscriptionId in `appsettings.json`. Current data is: {@Settings}",
@@ -34,7 +37,7 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 return false;
             }
 
-            if (this._configuration.FileSecurityDetails?.CertificateId == null)
+            if (this._configuration.CertificateDetails?.CertificateId == null)
             {
                 Log.Error(
                     "Invalid configuration. FileSecurity must have a configured CertificateId in `appsettings.json`. Current data is: {@Settings}",
