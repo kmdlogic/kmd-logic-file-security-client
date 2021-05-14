@@ -7,6 +7,8 @@
 namespace Kmd.Logic.FileSecurity.Client
 {
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
@@ -16,6 +18,40 @@ namespace Kmd.Logic.FileSecurity.Client
     /// </summary>
     internal static partial class InternalClientExtensions
     {
+            /// <summary>
+            /// Get all certificates managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the certificate.
+            /// </param>
+            public static IList<CertificateListResponse> GetAllCertificates(this IInternalClient operations, System.Guid subscriptionId)
+            {
+                return operations.GetAllCertificatesAsync(subscriptionId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get all certificates managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the certificate.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<CertificateListResponse>> GetAllCertificatesAsync(this IInternalClient operations, System.Guid subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllCertificatesWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
             /// <summary>
             /// Creates/Uploads a certificate for a specific subscription.
             /// </summary>
@@ -189,6 +225,46 @@ namespace Kmd.Logic.FileSecurity.Client
             public static async Task DeleteCertificatesAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid certificateId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.DeleteCertificatesWithHttpMessagesAsync(subscriptionId, certificateId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Creates a signconfiguration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the pdf document privileges and other configuration details
+            /// </param>
+            public static SignConfigurationPdfResponse CreatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest))
+            {
+                return operations.CreatePdfSignConfigurationAsync(subscriptionId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates a signconfiguration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the pdf document privileges and other configuration details
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SignConfigurationPdfResponse> CreatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreatePdfSignConfigurationWithHttpMessagesAsync(subscriptionId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }
