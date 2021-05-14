@@ -42,6 +42,20 @@ namespace Kmd.Logic.FileSecurity.Client
 
 
         /// <summary>
+        /// Get all certificates managed by the subscription.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the certificate.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<IList<CertificateListResponse>>> GetAllCertificatesWithHttpMessagesAsync(System.Guid subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Creates/Uploads a certificate for a specific subscription.
         /// </summary>
         /// <param name='subscriptionId'>
@@ -117,6 +131,24 @@ namespace Kmd.Logic.FileSecurity.Client
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> DeleteCertificatesWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid certificateId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
+        /// Creates a signconfiguration for pdf document type
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the configurations.
+        /// </param>
+        /// <param name='request'>
+        /// The details of the pdf document privileges and other configuration
+        /// details
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<SignConfigurationPdfResponse>> CreatePdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

@@ -4,7 +4,7 @@ A dotnet client library for using File Security module in KMD Logic platform thr
 
 ## The purpose of the File Security API
 
-To allow products using the Logic platform to use File Security in order to create,update,read ceritificates
+To allow products using the Logic platform to use File Security in order to create,update,read ceritificates and sign configurations. Sign configurations will be having privileges and optionally a certificate which can be used to sign a document. Using the privileges the configuration owner can manage the access and different privileges in the document generated. As of now supported document type is Pdf.
 
 
 ## Getting started in ASP.NET Core
@@ -22,6 +22,7 @@ The Logic FileSecurityClient provides APIs for:
 * Create a certificate;
 * Update a certificate;
 * Delete a certificate;
+* Create a sign configuration
 
 ## How to configure the File Security client
 
