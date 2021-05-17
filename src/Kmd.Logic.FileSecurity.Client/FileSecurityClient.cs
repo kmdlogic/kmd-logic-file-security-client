@@ -132,6 +132,33 @@ namespace Kmd.Logic.FileSecurity.Client
         }
 
         /// <summary>
+        /// Get sign configuration.
+        /// </summary>
+        /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <returns>SignConfigurationPdfResponse.</returns>
+        public async Task<SignConfigurationPdfResponse> GetSignConfiguration(Guid signConfigurationId)
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationDetailsResponse = await client.GetPdfSignConfigurationWithHttpMessagesAsync(
+                 this.options.SubscriptionId,
+                 signConfigurationId).ConfigureAwait(false))
+            {
+                switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return signConfigurationDetailsResponse.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new FileSecurityException($"Sign Configuration with Id {signConfigurationId} not found");
+
+                    default:
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid sign configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
         /// Disposing the rest of the classes.
         /// </summary>
         public void Dispose()

@@ -21,5 +21,10 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
         /// Gets or sets Certificate details.
         /// </summary>
         public CertificateDetails CertificateDetails { get; set; } = new CertificateDetails();
+
+        /// <summary>
+        /// Gets or sets Sign Configuration details.
+        /// </summary>
+        public SignConfigurationDetails SignConfigurationDetails { get; set; } = new SignConfigurationDetails();
     }
 }

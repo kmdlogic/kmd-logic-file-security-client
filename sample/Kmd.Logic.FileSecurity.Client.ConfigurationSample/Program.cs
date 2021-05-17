@@ -1,9 +1,9 @@
-﻿using Kmd.Logic.Identity.Authorization;
-using Microsoft.Extensions.Configuration;
-using Serilog;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Kmd.Logic.Identity.Authorization;
+using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
 {
@@ -62,6 +62,7 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
             using (var tokenProviderFactory = new LogicTokenProviderFactory(configuration.TokenProvider))
             {
                 var fileSecurityClient = new FileSecurityClient(httpClient, tokenProviderFactory, configuration.FileSecurityOptions);
+
                 var certificateId = configuration.CertificateDetails.CertificateId;
 
                 Log.Information("Fetching certificate details for certificate id {CertificateId} ", configuration.CertificateDetails.CertificateId);
@@ -74,6 +75,19 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 }
 
                 Console.WriteLine("Certificate ID: {0} \nCertificate Name: {1}\nSubscription ID : {2}", result.CertificateId, result.Name, result.SubscriptionId);
+
+                var signConfigurationID = configuration.SignConfigurationDetails.SignConfigurationId;
+
+                Log.Information("Fetching sign configuration details for sign configuration id {SignConfigurationId}", configuration.SignConfigurationDetails.SignConfigurationId);
+                var signConfigurationResult = await fileSecurityClient.GetSignConfiguration(signConfigurationID);
+
+                if (signConfigurationResult == null)
+                {
+                    Log.Error("Invalid sign configuration id {Id}", configuration.SignConfigurationDetails.SignConfigurationId);
+                    return;
+                }
+
+                Log.Information("Detailed Sign Configuration data: {@SignConfiguration}", signConfigurationResult);
             }
         }
     }
