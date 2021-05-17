@@ -77,7 +77,7 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
             Console.WriteLine("Certificate ID: {0} \nCertificate Name: {1}\nSubscription ID : {2}", result.CertificateId, result.Name, result.SubscriptionId);
 
             // Create a Sign Connfiguration 
-            var signConfigurationRequest = BuildSignConfigurationRequest();
+            var signConfigurationRequest = BuildSignConfigurationRequest(configuration);
             Log.Information("Creating signconfiguration...");
             var signConfigurationResult = await fileSecurityClient.CreateSignConfigurationPdf(signConfigurationRequest).ConfigureAwait(false);
             if (signConfigurationResult == null)
@@ -93,7 +93,7 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 signConfigurationResult.SubscriptionId);
         }
 
-        private static SignConfigurationPdfRequestDetails BuildSignConfigurationRequest()
+        private static SignConfigurationPdfRequestDetails BuildSignConfigurationRequest(AppConfiguration configuration)
         {
             var pdfPrivilege = new PdfPrivilegeModel(
                 copyAllowLevel: 1,
@@ -113,7 +113,7 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                   signConfigurationId: Guid.Empty,
                   name: "TestSignConfiguration",
                   ownerPassword: "TestPwd",
-                  certificateId: Guid.Empty,
+                  certificateId: configuration.CertificateDetails.CertificateId,
                   subscriptionId: Guid.Empty,
                   pdfPrivilege: pdfPrivilege
                 );
