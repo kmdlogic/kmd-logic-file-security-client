@@ -6,6 +6,43 @@
   },
   "paths": {
     "/subscriptions/{subscriptionId}/certificates": {
+      "get": {
+        "tags": [
+          "Certificates"
+        ],
+        "summary": "Get all certificates managed by the subscription.",
+        "operationId": "GetAllCertificates",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the certificate.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CertificateListResponse"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      },
       "post": {
         "tags": [
           "Certificates"
@@ -222,9 +259,80 @@
           }
         ]
       }
+    },
+    "/subscriptions/{subscriptionId}/signconfigurations/pdf": {
+      "post": {
+        "tags": [
+          "SignConfigurationPdf"
+        ],
+        "summary": "Creates a signconfiguration for pdf document type",
+        "operationId": "CreatePdfSignConfiguration",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The details of the pdf document privileges and other configuration details",
+            "schema": {
+              "$ref": "#/definitions/PdfPrivilegeModelSignConfigurationCreateUpdateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SignConfigurationPdfResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
     }
   },
   "definitions": {
+    "CertificateListResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
     "CertificateResponse": {
       "type": "object",
       "properties": {
@@ -242,6 +350,98 @@
         "createdDate": {
           "format": "date-time",
           "type": "string"
+        }
+      }
+    },
+    "PdfPrivilegeModel": {
+      "type": "object",
+      "properties": {
+        "copyAllowLevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "changeAllowLevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "allowAssembly": {
+          "type": "boolean"
+        },
+        "allowScreenReaders": {
+          "type": "boolean"
+        },
+        "allowFillIn": {
+          "type": "boolean"
+        },
+        "allowModifyAnnotations": {
+          "type": "boolean"
+        },
+        "allowCopy": {
+          "type": "boolean"
+        },
+        "allowModifyContents": {
+          "type": "boolean"
+        },
+        "allowDegradedPrinting": {
+          "type": "boolean"
+        },
+        "allowPrint": {
+          "type": "boolean"
+        },
+        "printAllowLevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "allowAll": {
+          "type": "boolean"
+        },
+        "forbidAll": {
+          "type": "boolean"
+        }
+      }
+    },
+    "PdfPrivilegeModelSignConfigurationCreateUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "ownerPassword": {
+          "type": "string"
+        },
+        "certificateId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "privileges": {
+          "$ref": "#/definitions/PdfPrivilegeModel"
+        }
+      }
+    },
+    "SignConfigurationPdfResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "certificateId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "subscriptionId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "createdDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "pdfPrivilege": {
+          "$ref": "#/definitions/PdfPrivilegeModel"
         }
       }
     }
