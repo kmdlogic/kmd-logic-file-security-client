@@ -79,11 +79,11 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 var signConfigurationID = configuration.SignConfigurationDetails.SignConfigurationId;
 
                 Log.Information("Fetching sign configuration details for sign configuration id {SignConfigurationId}", configuration.SignConfigurationDetails.SignConfigurationId);
-                var signConfigurationResult = await fileSecurityClient.GetSignConfiguration(signConfigurationID);
+                var signConfigurationResult = await fileSecurityClient.GetPdfSignConfiguration(signConfigurationID);
 
                 if (signConfigurationResult == null)
                 {
-                    Log.Error("Invalid sign configuration id {Id}", configuration.SignConfigurationDetails.SignConfigurationId);
+                    Log.Error("Sign configuration not found for id {Id}", configuration.SignConfigurationDetails.SignConfigurationId);
                     return;
                 }
 

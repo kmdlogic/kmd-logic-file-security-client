@@ -136,7 +136,7 @@ namespace Kmd.Logic.FileSecurity.Client
         /// </summary>
         /// <param name="signConfigurationId">SignConfigurationID.</param>
         /// <returns>SignConfigurationPdfResponse.</returns>
-        public async Task<SignConfigurationPdfResponse> GetSignConfiguration(Guid signConfigurationId)
+        public async Task<SignConfigurationPdfResponse> GetPdfSignConfiguration(Guid signConfigurationId)
         {
             var client = this.CreateClient();
 
