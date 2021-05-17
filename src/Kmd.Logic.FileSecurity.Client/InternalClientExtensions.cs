@@ -239,7 +239,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='request'>
             /// The details of the pdf document privileges and other configuration details
             /// </param>
-            public static SignConfigurationPdfResponse CreatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateRequest request = default(PdfPrivilegeModelSignConfigurationCreateRequest))
+            public static SignConfigurationPdfResponse CreatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest))
             {
                 return operations.CreatePdfSignConfigurationAsync(subscriptionId, request).GetAwaiter().GetResult();
             }
@@ -259,7 +259,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SignConfigurationPdfResponse> CreatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateRequest request = default(PdfPrivilegeModelSignConfigurationCreateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SignConfigurationPdfResponse> CreatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreatePdfSignConfigurationWithHttpMessagesAsync(subscriptionId, request, null, cancellationToken).ConfigureAwait(false))
                 {
