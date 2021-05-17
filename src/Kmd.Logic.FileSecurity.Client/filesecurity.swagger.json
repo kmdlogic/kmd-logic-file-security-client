@@ -291,125 +291,7 @@
             "in": "body",
             "description": "The details of the pdf document privileges and other configuration details",
             "schema": {
-              "$ref": "#/definitions/PdfPrivilegeModelSignConfigurationCreateRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SignConfigurationPdfResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
-      }
-    },
-    "/subscriptions/{subscriptionId}/signconfigurations/pdf/{signConfigurationId}": {
-      "get": {
-        "tags": [
-          "SignConfigurationPdf"
-        ],
-        "summary": "Get details of the requested sign configuration for pdf document type",
-        "operationId": "GetPdfSignConfiguration",
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The subscription that owns the configurations.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "signConfigurationId",
-            "in": "path",
-            "description": "Identifier of sign configuration to be used.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SignConfigurationPdfResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        },
-        "security": [
-          {
-            "Bearer": []
-          }
-        ]
-      },
-      "put": {
-        "tags": [
-          "SignConfigurationPdf"
-        ],
-        "summary": "Updates a sign configuration for pdf document type",
-        "operationId": "UpdatePdfSignConfiguration",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "application/json",
-          "text/json"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The subscription that owns the configurations.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "signConfigurationId",
-            "in": "path",
-            "description": "Identifier of the sign configuration.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "description": "The details of the pdf document privileges and other configuration details",
-            "schema": {
-              "$ref": "#/definitions/PdfPrivilegeModelSignConfigurationUpdateRequest"
+              "$ref": "#/definitions/PdfPrivilegeModelSignConfigurationCreateUpdateRequest"
             }
           }
         ],
@@ -518,7 +400,7 @@
         }
       }
     },
-    "PdfPrivilegeModelSignConfigurationCreateRequest": {
+    "PdfPrivilegeModelSignConfigurationCreateUpdateRequest": {
       "type": "object",
       "properties": {
         "name": {
@@ -559,24 +441,6 @@
           "type": "string"
         },
         "pdfPrivilege": {
-          "$ref": "#/definitions/PdfPrivilegeModel"
-        }
-      }
-    },
-    "PdfPrivilegeModelSignConfigurationUpdateRequest": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "ownerPassword": {
-          "type": "string"
-        },
-        "certificateId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "privileges": {
           "$ref": "#/definitions/PdfPrivilegeModel"
         }
       }

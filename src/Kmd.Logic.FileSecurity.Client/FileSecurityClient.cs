@@ -115,6 +115,35 @@ namespace Kmd.Logic.FileSecurity.Client
         }
 
         /// <summary>
+        /// Creates sign configuration.
+        /// </summary>
+        /// <param name="createSignConfigurationPdfRequestDetails">Signconfiguration create request details.</param>
+        /// <returns>SignConfigurationPdfResponse.</returns>
+        public async Task<SignConfigurationPdfResponse> CreateSignConfigurationPdf(SignConfigurationPdfRequestDetails createSignConfigurationPdfRequestDetails)
+        {
+            var client = this.CreateClient();
+            var request = new PdfPrivilegeModelSignConfigurationCreateUpdateRequest(
+                            name: createSignConfigurationPdfRequestDetails.Name,
+                            ownerPassword: createSignConfigurationPdfRequestDetails.OwnerPassword,
+                            certificateId: createSignConfigurationPdfRequestDetails.CertificateId,
+                            privileges: createSignConfigurationPdfRequestDetails.PdfPrivilege);
+
+            using var signConfigurationDetailsResponse = await client.CreatePdfSignConfigurationWithHttpMessagesAsync(
+                 this.options.SubscriptionId, request).ConfigureAwait(false);
+            switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return signConfigurationDetailsResponse.Body;
+
+                case System.Net.HttpStatusCode.NotFound:
+                    return null;
+
+                default:
+                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+            }
+        }
+
+        /// <summary>
         /// Delete certificate.
         /// </summary>
         /// <param name="certificateId">CertificateId.</param>
