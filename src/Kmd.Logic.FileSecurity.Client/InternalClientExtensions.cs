@@ -322,7 +322,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='request'>
             /// The details of the pdf document privileges and other configuration details
             /// </param>
-            public static SignConfigurationPdfResponse UpdatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest))
+            public static SignConfigurationPdfResponse UpdatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest))
             {
                 return operations.UpdatePdfSignConfigurationAsync(subscriptionId, signConfigurationId, request).GetAwaiter().GetResult();
             }
@@ -345,7 +345,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SignConfigurationPdfResponse> UpdatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SignConfigurationPdfResponse> UpdatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdatePdfSignConfigurationWithHttpMessagesAsync(subscriptionId, signConfigurationId, request, null, cancellationToken).ConfigureAwait(false))
                 {

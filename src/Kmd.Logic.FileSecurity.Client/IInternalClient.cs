@@ -187,7 +187,6 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SignConfigurationPdfResponse>> UpdatePdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-
+        Task<HttpOperationResponse<SignConfigurationPdfResponse>> UpdatePdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
