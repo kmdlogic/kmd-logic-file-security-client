@@ -9,22 +9,22 @@ namespace Kmd.Logic.FileSecurity.Client.Models
     using Newtonsoft.Json;
     using System.Linq;
 
-    public partial class PdfPrivilegeModelSignConfigurationCreateUpdateRequest
+    public partial class PdfPrivilegeModelSignConfigurationUpdateRequest
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// PdfPrivilegeModelSignConfigurationCreateUpdateRequest class.
+        /// PdfPrivilegeModelSignConfigurationUpdateRequest class.
         /// </summary>
-        public PdfPrivilegeModelSignConfigurationCreateUpdateRequest()
+        public PdfPrivilegeModelSignConfigurationUpdateRequest()
         {
             CustomInit();
         }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// PdfPrivilegeModelSignConfigurationCreateUpdateRequest class.
+        /// PdfPrivilegeModelSignConfigurationUpdateRequest class.
         /// </summary>
-        public PdfPrivilegeModelSignConfigurationCreateUpdateRequest(string name = default(string), string ownerPassword = default(string), System.Guid? certificateId = default(System.Guid?), PdfPrivilegeModel privileges = default(PdfPrivilegeModel))
+        public PdfPrivilegeModelSignConfigurationUpdateRequest(string name = default(string), string ownerPassword = default(string), System.Guid? certificateId = default(System.Guid?), PdfPrivilegeModel privileges = default(PdfPrivilegeModel))
         {
             Name = name;
             OwnerPassword = ownerPassword;

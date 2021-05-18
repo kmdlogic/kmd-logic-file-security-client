@@ -122,7 +122,7 @@ namespace Kmd.Logic.FileSecurity.Client
         public async Task<SignConfigurationPdfResponse> CreateSignConfigurationPdf(SignConfigurationPdfRequestDetails createSignConfigurationPdfRequestDetails)
         {
             var client = this.CreateClient();
-            var request = new PdfPrivilegeModelSignConfigurationCreateUpdateRequest(
+            var request = new PdfPrivilegeModelSignConfigurationCreateRequest(
                             name: createSignConfigurationPdfRequestDetails.Name,
                             ownerPassword: createSignConfigurationPdfRequestDetails.OwnerPassword,
                             certificateId: createSignConfigurationPdfRequestDetails.CertificateId,
@@ -157,6 +157,33 @@ namespace Kmd.Logic.FileSecurity.Client
                  certificateId).ConfigureAwait(false))
             {
                 return certificateDetailsResponse.Response;
+            }
+        }
+
+        /// <summary>
+        /// Get sign configuration.
+        /// </summary>
+        /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <returns>SignConfigurationPdfResponse.</returns>
+        public async Task<SignConfigurationPdfResponse> GetPdfSignConfiguration(Guid signConfigurationId)
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationDetailsResponse = await client.GetPdfSignConfigurationWithHttpMessagesAsync(
+                 this.options.SubscriptionId,
+                 signConfigurationId).ConfigureAwait(false))
+            {
+                switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return signConfigurationDetailsResponse.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new FileSecurityException($"Sign Configuration with Id {signConfigurationId} not found");
+
+                    default:
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid sign configuration provided to access File Security service");
+                }
             }
         }
 
