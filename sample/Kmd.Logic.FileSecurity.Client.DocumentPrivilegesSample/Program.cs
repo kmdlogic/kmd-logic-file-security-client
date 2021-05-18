@@ -76,7 +76,9 @@ namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
                 DocumentPrivilege documentPrivilege = FillPrivileges(signConfigurationResult.PdfPrivilege);
                 document.Encrypt("user", "owner", documentPrivilege, CryptoAlgorithm.AESx128, false);
                 document.Save(dataDir + "SetPrivileges_out.pdf");
-                Log.Information("Document with configured privileges generated successfully...");
+                Log.Information(
+                    "Document with configured privileges generated successfully at {location}",
+                    dataDir + "SetPrivileges_out.pdf");
             }
         }
 
