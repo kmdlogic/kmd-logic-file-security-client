@@ -76,7 +76,7 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
 
             Console.WriteLine("Certificate ID: {0} \nCertificate Name: {1}\nSubscription ID : {2}", result.CertificateId, result.Name, result.SubscriptionId);
 
-            // Create a Sign Connfiguration 
+            // Create a Sign Configuration
             var signConfigurationRequest = BuildSignConfigurationRequest(configuration);
             Log.Information("Creating signconfiguration...");
             var signConfigurationResult = await fileSecurityClient.CreateSignConfigurationPdf(signConfigurationRequest).ConfigureAwait(false);
@@ -91,6 +91,20 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 signConfigurationResult.Id,
                 signConfigurationResult.Name,
                 signConfigurationResult.SubscriptionId);
+
+            // Get a Sign Configuration
+            var signConfigurationID = configuration.SignConfigurationDetails.SignConfigurationId;
+
+            Log.Information("Fetching sign configuration details for sign configuration id {SignConfigurationId}", configuration.SignConfigurationDetails.SignConfigurationId);
+            var signConfigurationGetResult = await fileSecurityClient.GetPdfSignConfiguration(signConfigurationID);
+
+            if (signConfigurationGetResult == null)
+            {
+                Log.Error("Sign configuration not found for id {Id}", configuration.SignConfigurationDetails.SignConfigurationId);
+                return;
+            }
+
+            Console.WriteLine("Detailed Sign Configuration data: {@SignConfiguration}", signConfigurationGetResult);
         }
 
         private static SignConfigurationPdfRequestDetails BuildSignConfigurationRequest(AppConfiguration configuration)
