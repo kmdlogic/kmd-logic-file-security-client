@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{EC
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample", "sample\Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample\Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample.csproj", "{232CEEF6-58A6-4C0A-9B62-5B5A2B48C280}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{A7C02461-2A43-45C9-8C7F-32A681C489E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7C02461-2A43-45C9-8C7F-32A681C489E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7C02461-2A43-45C9-8C7F-32A681C489E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{232CEEF6-58A6-4C0A-9B62-5B5A2B48C280}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{232CEEF6-58A6-4C0A-9B62-5B5A2B48C280}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{232CEEF6-58A6-4C0A-9B62-5B5A2B48C280}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{232CEEF6-58A6-4C0A-9B62-5B5A2B48C280}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -43,6 +49,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E4428889-CBB9-49D1-AC25-ED36EEC2CC77} = {7DD4241F-7B3C-4FB4-A12A-F84130BE9033}
 		{A7C02461-2A43-45C9-8C7F-32A681C489E2} = {28575536-50B9-4ED1-B5D8-A3F25FDAD261}
+		{232CEEF6-58A6-4C0A-9B62-5B5A2B48C280} = {28575536-50B9-4ED1-B5D8-A3F25FDAD261}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {34F3BC97-C035-4259-887A-378BA036EB97}
