@@ -146,7 +146,7 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <summary>
         /// Updates sign configuration.
         /// </summary>
-        /// <param name="updateSignConfigurationPdfRequestDetails">Signconfiguration create request details.</param>
+        /// <param name="updateSignConfigurationPdfRequestDetails">Signconfiguration update request details.</param>
         /// <returns>SignConfigurationPdfResponse.</returns>
         public async Task<SignConfigurationPdfResponse> UpdateSignConfigurationPdf(SignConfigurationPdfRequestDetails updateSignConfigurationPdfRequestDetails)
         {
