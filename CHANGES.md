@@ -1,5 +1,6 @@
 1.1.0
 * Added SignConfiguration POST API
+* Added SignConfiguration PUT API
 
 1.0.0
 * Created a nuget package
