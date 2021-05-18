@@ -122,7 +122,7 @@ namespace Kmd.Logic.FileSecurity.Client
         public async Task<SignConfigurationPdfResponse> CreateSignConfigurationPdf(SignConfigurationPdfRequestDetails createSignConfigurationPdfRequestDetails)
         {
             var client = this.CreateClient();
-            var request = new PdfPrivilegeModelSignConfigurationCreateUpdateRequest(
+            var request = new PdfPrivilegeModelSignConfigurationCreateRequest(
                             name: createSignConfigurationPdfRequestDetails.Name,
                             ownerPassword: createSignConfigurationPdfRequestDetails.OwnerPassword,
                             certificateId: createSignConfigurationPdfRequestDetails.CertificateId,
