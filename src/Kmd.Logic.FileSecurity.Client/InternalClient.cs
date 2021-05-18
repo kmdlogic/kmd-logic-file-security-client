@@ -1097,7 +1097,7 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<SignConfigurationPdfResponse>> CreatePdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<SignConfigurationPdfResponse>> CreatePdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateRequest request = default(PdfPrivilegeModelSignConfigurationCreateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1267,7 +1267,7 @@ namespace Kmd.Logic.FileSecurity.Client
 
             if (customHeaders != null)
             {
-                foreach (var _header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
                     if (_httpRequest.Headers.Contains(_header.Key))
                     {
@@ -1302,12 +1302,10 @@ namespace Kmd.Logic.FileSecurity.Client
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 401 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
-                {
+                if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
-                else
-                {
+                else {
                     _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
@@ -1379,7 +1377,7 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<SignConfigurationPdfResponse>> UpdatePdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<SignConfigurationPdfResponse>> UpdatePdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1450,11 +1448,11 @@ namespace Kmd.Logic.FileSecurity.Client
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 401 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null)
+                if (_httpResponse.Content != null) 
                 {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
-                else
+                else 
                 {
                     _responseContent = string.Empty;
                 }

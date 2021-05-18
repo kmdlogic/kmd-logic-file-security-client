@@ -239,7 +239,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='request'>
             /// The details of the pdf document privileges and other configuration details
             /// </param>
-            public static SignConfigurationPdfResponse CreatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest))
+            public static SignConfigurationPdfResponse CreatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateRequest request = default(PdfPrivilegeModelSignConfigurationCreateRequest))
             {
                 return operations.CreatePdfSignConfigurationAsync(subscriptionId, request).GetAwaiter().GetResult();
             }
@@ -259,7 +259,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SignConfigurationPdfResponse> CreatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SignConfigurationPdfResponse> CreatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateRequest request = default(PdfPrivilegeModelSignConfigurationCreateRequest), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreatePdfSignConfigurationWithHttpMessagesAsync(subscriptionId, request, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -322,7 +322,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='request'>
             /// The details of the pdf document privileges and other configuration details
             /// </param>
-            public static SignConfigurationPdfResponse UpdatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest))
+            public static SignConfigurationPdfResponse UpdatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest))
             {
                 return operations.UpdatePdfSignConfigurationAsync(subscriptionId, signConfigurationId, request).GetAwaiter().GetResult();
             }
@@ -345,7 +345,7 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SignConfigurationPdfResponse> UpdatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationCreateUpdateRequest request = default(PdfPrivilegeModelSignConfigurationCreateUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SignConfigurationPdfResponse> UpdatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdatePdfSignConfigurationWithHttpMessagesAsync(subscriptionId, signConfigurationId, request, null, cancellationToken).ConfigureAwait(false))
                 {
