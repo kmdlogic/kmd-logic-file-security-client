@@ -167,6 +167,35 @@ namespace Kmd.Logic.FileSecurity.Client
         }
 
         /// <summary>
+        /// Updates sign configuration.
+        /// </summary>
+        /// <param name="updateSignConfigurationPdfRequestDetails">Signconfiguration update request details.</param>
+        /// <returns>SignConfigurationPdfResponse.</returns>
+        public async Task<SignConfigurationPdfResponse> UpdateSignConfigurationPdf(SignConfigurationPdfRequestDetails updateSignConfigurationPdfRequestDetails)
+        {
+            var client = this.CreateClient();
+            var request = new PdfPrivilegeModelSignConfigurationUpdateRequest(
+                            name: updateSignConfigurationPdfRequestDetails.Name,
+                            ownerPassword: updateSignConfigurationPdfRequestDetails.OwnerPassword,
+                            certificateId: updateSignConfigurationPdfRequestDetails.CertificateId,
+                            privileges: updateSignConfigurationPdfRequestDetails.PdfPrivilege);
+
+            using var signConfigurationDetailsResponse = await client.UpdatePdfSignConfigurationWithHttpMessagesAsync(
+                 this.options.SubscriptionId, updateSignConfigurationPdfRequestDetails.SignConfigurationId, request).ConfigureAwait(false);
+            switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return signConfigurationDetailsResponse.Body;
+
+                case System.Net.HttpStatusCode.NotFound:
+                    throw new FileSecurityException($"Sign configuration with Id {updateSignConfigurationPdfRequestDetails.SignConfigurationId} not found");
+
+                default:
+                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+            }
+        }
+
+        /// <summary>
         /// Delete certificate.
         /// </summary>
         /// <param name="certificateId">CertificateId.</param>
