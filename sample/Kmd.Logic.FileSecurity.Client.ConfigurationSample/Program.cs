@@ -104,7 +104,15 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
                 return;
             }
 
-            Console.WriteLine("Detailed Sign Configuration data: {@SignConfiguration}", signConfigurationGetResult);
+            Console.WriteLine(
+                "Sign Configuration Details. \nSignConfiguration ID: {0} \nSignConfiguration Name: {1}\nCertificate ID : {2}\nSubscription ID : {3}\nCreatedDate : {4}\nDocumentType : {5}\nPrivileges : {6}",
+                signConfigurationGetResult.Id,
+                signConfigurationGetResult.Name,
+                signConfigurationGetResult.CertificateId,
+                signConfigurationGetResult.SubscriptionId,
+                signConfigurationGetResult.CreatedDate,
+                "Pdf",
+                Newtonsoft.Json.JsonConvert.SerializeObject(signConfigurationGetResult.PdfPrivilege, Newtonsoft.Json.Formatting.Indented));
         }
 
         private static SignConfigurationPdfRequestDetails BuildSignConfigurationRequest(AppConfiguration configuration)
