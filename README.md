@@ -19,6 +19,7 @@ and add a reference to the [Kmd.Logic.Identity.Authorization](https://www.nuget.
 The Logic FileSecurityClient provides APIs for:
 
 * Get a certificate;
+* Get all certificates;
 * Create a certificate;
 * Update a certificate;
 * Delete a certificate;
