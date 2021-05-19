@@ -29,7 +29,7 @@ The Logic FileSecurityClient provides APIs for:
 
 ## How to configure the File Security client
 
-Perhaps the easiest way to configure the File Security client is though Application Settings.
+Perhaps the easiest way to configure the File Security client is through Application Settings.
 
 ```json
 {
@@ -38,8 +38,14 @@ Perhaps the easiest way to configure the File Security client is though Applicat
     "ClientSecret": "",
     "AuthorizationScope": ""
   },
-  "FileSecurity": {
+  "FileSecurityOptions": {
     "SubscriptionId": ""
+  },
+  "CertificateDetails": {
+    "CertificateId": ""
+  },
+  "SignConfigurationDetails": {
+    "SignConfigurationId":  ""
   }
 }
 ```
