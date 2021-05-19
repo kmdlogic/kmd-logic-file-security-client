@@ -217,6 +217,23 @@ namespace Kmd.Logic.FileSecurity.Client
         }
 
         /// <summary>
+        /// Delete sign configuration.
+        /// </summary>
+        /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <returns>HttpResponseMessage.</returns>
+        public async Task<HttpResponseMessage> DeletePdfSignConfiguration(Guid signConfigurationId)
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationDetailsResponse = await client.DeleteSignConfigurationPdfWithHttpMessagesAsync(
+                 this.options.SubscriptionId,
+                 signConfigurationId).ConfigureAwait(false))
+            {
+                return signConfigurationDetailsResponse.Response;
+            }
+        }
+
+        /// <summary>
         /// Disposing the rest of the classes.
         /// </summary>
         public void Dispose()
