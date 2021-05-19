@@ -68,15 +68,15 @@ namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
 
             // Generate document
             Log.Information("Generate document using privileges...");
-            string dataDir = configuration.SignConfigurationDetails.PdfEmptySampleLocation;
-            using (Document document = new Document(dataDir + "input.pdf"))
+            string pdfSample = configuration.SignConfigurationDetails.PdfEmptySampleLocation;
+            using (Document document = new Document(pdfSample))
             {
                 DocumentPrivilege documentPrivilege = FillPrivileges(signConfigurationResult.PdfPrivilege);
                 document.Encrypt(string.Empty, "owner", documentPrivilege, CryptoAlgorithm.AESx128, false);
-                document.Save(configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "SetPrivileges_out.pdf");
+                document.Save(configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "pdf_with_privileges.pdf");
                 Log.Information(
                     "Document with configured privileges generated successfully at {location}",
-                    configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "SetPrivileges_out.pdf");
+                    configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "pdf-with-privileges.pdf");
             }
         }
 

@@ -13,7 +13,7 @@ namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
         public Guid SignConfigurationId { get; set; }
 
         /// <summary>
-        /// Gets or sets the preconfigured location where a sample pdf is located. 
+        /// Gets or sets the preconfigured location where a sample pdf is located.
         /// An example pdf for reference is available at path /Data/Pdf/.
         /// </summary>
         public string PdfEmptySampleLocation { get; set; }
