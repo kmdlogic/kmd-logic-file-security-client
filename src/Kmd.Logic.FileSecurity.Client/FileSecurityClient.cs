@@ -252,7 +252,17 @@ namespace Kmd.Logic.FileSecurity.Client
                  this.options.SubscriptionId,
                  signConfigurationId).ConfigureAwait(false))
             {
-                return signConfigurationDetailsResponse.Response;
+                switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.NoContent:
+                        return signConfigurationDetailsResponse.Response;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new FileSecurityException($"Sign Configuration with Id {signConfigurationId} not found");
+
+                    default:
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Response?.ToString() ?? "Invalid sign configuration provided to access File Security service");
+                }
             }
         }
 
