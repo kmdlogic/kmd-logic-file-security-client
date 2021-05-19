@@ -1,5 +1,4 @@
 ﻿using Serilog;
-using System;
 
 namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
 {

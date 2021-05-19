@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Aspose.Pdf;
@@ -12,7 +11,7 @@ using Serilog;
 
 namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
 {
-    class Program
+    public class Program
     {
         public static async Task Main(string[] args)
         {
@@ -53,7 +52,6 @@ namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
             var fileSecurityClient = new FileSecurityClient(httpClient, tokenProviderFactory, configuration.FileSecurityOptions);
 
             // Get Sign Configuration
-            var signConfigurationRequest = BuildSignConfigurationRequest();
             Log.Information("Getting signconfiguration...");
             var signConfigurationResult = await fileSecurityClient.GetPdfSignConfiguration(configuration.SignConfigurationDetails.SignConfigurationId).ConfigureAwait(false);
             if (signConfigurationResult == null)
@@ -70,15 +68,15 @@ namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
 
             // Generate document
             Log.Information("Generate document using privileges...");
-            string dataDir = GetDataDir_AsposePdf_SecuritySignatures();
+            string dataDir = configuration.SignConfigurationDetails.PdfEmptySampleLocation;
             using (Document document = new Document(dataDir + "input.pdf"))
             {
                 DocumentPrivilege documentPrivilege = FillPrivileges(signConfigurationResult.PdfPrivilege);
-                document.Encrypt("user", "owner", documentPrivilege, CryptoAlgorithm.AESx128, false);
-                document.Save(dataDir + "SetPrivileges_out.pdf");
+                document.Encrypt(string.Empty, "owner", documentPrivilege, CryptoAlgorithm.AESx128, false);
+                document.Save(configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "SetPrivileges_out.pdf");
                 Log.Information(
                     "Document with configured privileges generated successfully at {location}",
-                    dataDir + "SetPrivileges_out.pdf");
+                    configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "SetPrivileges_out.pdf");
             }
         }
 
@@ -99,57 +97,6 @@ namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
             privileges.PrintAllowLevel = pdfPrivilege.PrintAllowLevel.Value;
 
             return privileges;
-        }
-
-        private static string GetDataDir_AsposePdf_SecuritySignatures()
-        {
-            return Path.GetFullPath(GetDataDir_Data() + "Pdf/");
-        }
-
-        private static string GetDataDir_Data()
-        {
-            var parent = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
-            string startDirectory = null;
-            if (parent != null)
-            {
-                var directoryInfo = parent.Parent;
-                if (directoryInfo != null)
-                {
-                    startDirectory = directoryInfo.FullName;
-                }
-            }
-            else
-            {
-                startDirectory = parent.FullName;
-            }
-
-            return Path.Combine(startDirectory, "Data\\");
-        }
-
-        private static SignConfigurationPdfRequestDetails BuildSignConfigurationRequest()
-        {
-            var pdfPrivilege = new PdfPrivilegeModel(
-                copyAllowLevel: 1,
-                changeAllowLevel: 1,
-                allowAssembly: true,
-                allowScreenReaders: true,
-                allowFillIn: true,
-                allowModifyAnnotations: true,
-                allowCopy: true,
-                allowModifyContents: true,
-                allowDegradedPrinting: true,
-                allowPrint: true,
-                printAllowLevel: 1,
-                allowAll: true,
-                forbidAll: false);
-            return new SignConfigurationPdfRequestDetails(
-                  signConfigurationId: Guid.Empty,
-                  name: "TestSignConfiguration",
-                  ownerPassword: "TestPwd",
-                  certificateId: Guid.Empty,
-                  subscriptionId: Guid.Empty,
-                  pdfPrivilege: pdfPrivilege
-                );
         }
 
         private static void InitLogger()
