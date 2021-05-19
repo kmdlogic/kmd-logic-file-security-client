@@ -69,21 +69,18 @@ namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
             // Generate document
             Log.Information("Generate document using privileges...");
             string pdfSample = configuration.SignConfigurationDetails.PdfEmptySampleLocation;
-            using (Document document = new Document(pdfSample))
-            {
-                DocumentPrivilege documentPrivilege = FillPrivileges(signConfigurationResult.PdfPrivilege);
-                document.Encrypt(string.Empty, "owner", documentPrivilege, CryptoAlgorithm.AESx128, false);
-                document.Save(configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "pdf_with_privileges.pdf");
-                Log.Information(
-                    "Document with configured privileges generated successfully at {location}",
-                    configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "pdf-with-privileges.pdf");
-            }
+            using Document document = new Document(pdfSample);
+            var documentPrivilege = FillPrivileges(signConfigurationResult.PdfPrivilege);
+            document.Encrypt(string.Empty, "owner", documentPrivilege, CryptoAlgorithm.AESx128, false);
+            document.Save(configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "pdf_with_privileges.pdf");
+            Log.Information(
+                "Document with configured privileges generated successfully at {location}",
+                configuration.SignConfigurationDetails.PdfGeneratedDocumentLocation + "pdf-with-privileges.pdf");
         }
 
         private static DocumentPrivilege FillPrivileges(PdfPrivilegeModel pdfPrivilege)
         {
-            DocumentPrivilege privileges = DocumentPrivilege.ForbidAll;
-
+            var privileges = DocumentPrivilege.ForbidAll;
             privileges.CopyAllowLevel = pdfPrivilege.CopyAllowLevel.Value;
             privileges.ChangeAllowLevel = pdfPrivilege.ChangeAllowLevel.Value;
             privileges.AllowAssembly = pdfPrivilege.AllowAssembly.Value;
