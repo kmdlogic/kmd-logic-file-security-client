@@ -26,6 +26,7 @@ The Logic FileSecurityClient provides APIs for:
 * Create a sign configuration;
 * Get a sign configuration;
 * Update a sign configuration;
+* Delete a sign configuration;
 
 ## How to configure the File Security client
 

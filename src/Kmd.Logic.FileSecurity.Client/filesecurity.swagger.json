@@ -260,6 +260,45 @@
         ]
       }
     },
+    "/subscriptions/{subscriptionId}/signconfigurations": {
+      "get": {
+        "tags": [
+          "SignConfiguration"
+        ],
+        "summary": "Get all signconfiguration managed by the subscription.",
+        "operationId": "GetAllSignConfigurations",
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SignConfigurationListResponse"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
+      }
+    },
     "/subscriptions/{subscriptionId}/signconfigurations/pdf": {
       "post": {
         "tags": [
@@ -435,6 +474,44 @@
             "Bearer": []
           }
         ]
+      },
+      "delete": {
+        "tags": [
+          "SignConfigurationPdf"
+        ],
+        "summary": "Delete requested sign configuration managed by a subscription.",
+        "operationId": "DeleteSignConfigurationPdf",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The subscription that owns the configurations.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "signConfigurationId",
+            "in": "path",
+            "description": "Identifier of the sign configuration to delete.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "Bearer": []
+          }
+        ]
       }
     }
   },
@@ -467,6 +544,18 @@
         },
         "createdDate": {
           "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "SignConfigurationListResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
           "type": "string"
         }
       }
