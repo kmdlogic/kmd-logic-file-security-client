@@ -267,6 +267,28 @@ namespace Kmd.Logic.FileSecurity.Client
         }
 
         /// <summary>
+        /// Get all sign configuration.
+        /// </summary>
+        /// <returns>List of sign configuration.</returns>
+        public async Task<IEnumerable<SignConfigurationListResponse>> GetAllSignConfiguration()
+        {
+            var client = this.CreateClient();
+
+            using (var certificateDetailsResponse = await client.GetAllSignConfigurationsWithHttpMessagesAsync(
+                 this.options.SubscriptionId).ConfigureAwait(false))
+            {
+                switch (certificateDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return certificateDetailsResponse.Body;
+
+                    default:
+                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
         /// Disposing the rest of the classes.
         /// </summary>
         public void Dispose()
