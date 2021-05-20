@@ -59,4 +59,5 @@ To get started:
 
 ## Sample applications
 
-Sample console application is included to demonstrate how to call the Logic File Security API. You will need to provide the settings described above in their `appsettings.json`.
+1. Sample console application `Kmd.Logic.FileSecurity.Client.ConfigurationSample` is included to demonstrate how to call the Logic File Security API. You will need to provide the settings described above in their `appsettings.json`.
+2. Sample console application `Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample` is included to demonstarte how to generate a pdf document using the configured privilges.
