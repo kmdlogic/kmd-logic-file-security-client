@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Kmd.Logic.FileSecurity.Client.Models;
@@ -115,6 +116,86 @@ namespace Kmd.Logic.FileSecurity.Client
         }
 
         /// <summary>
+        /// Get all certificates.
+        /// </summary>
+        /// <returns>List of Certificates.</returns>
+        public async Task<IEnumerable<CertificateListResponse>> GetAllCertificate()
+        {
+            var client = this.CreateClient();
+
+            using (var certificateDetailsResponse = await client.GetAllCertificatesWithHttpMessagesAsync(
+                 this.options.SubscriptionId).ConfigureAwait(false))
+            {
+                switch (certificateDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return certificateDetailsResponse.Body;
+
+                    default:
+                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Creates sign configuration.
+        /// </summary>
+        /// <param name="createSignConfigurationPdfRequestDetails">Signconfiguration create request details.</param>
+        /// <returns>SignConfigurationPdfResponse.</returns>
+        public async Task<SignConfigurationPdfResponse> CreateSignConfigurationPdf(SignConfigurationPdfRequestDetails createSignConfigurationPdfRequestDetails)
+        {
+            var client = this.CreateClient();
+            var request = new PdfPrivilegeModelSignConfigurationCreateRequest(
+                            name: createSignConfigurationPdfRequestDetails.Name,
+                            ownerPassword: createSignConfigurationPdfRequestDetails.OwnerPassword,
+                            certificateId: createSignConfigurationPdfRequestDetails.CertificateId,
+                            privileges: createSignConfigurationPdfRequestDetails.PdfPrivilege);
+
+            using var signConfigurationDetailsResponse = await client.CreatePdfSignConfigurationWithHttpMessagesAsync(
+                 this.options.SubscriptionId, request).ConfigureAwait(false);
+            switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return signConfigurationDetailsResponse.Body;
+
+                case System.Net.HttpStatusCode.NotFound:
+                    return null;
+
+                default:
+                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+            }
+        }
+
+        /// <summary>
+        /// Updates sign configuration.
+        /// </summary>
+        /// <param name="updateSignConfigurationPdfRequestDetails">Signconfiguration update request details.</param>
+        /// <returns>SignConfigurationPdfResponse.</returns>
+        public async Task<SignConfigurationPdfResponse> UpdateSignConfigurationPdf(SignConfigurationPdfRequestDetails updateSignConfigurationPdfRequestDetails)
+        {
+            var client = this.CreateClient();
+            var request = new PdfPrivilegeModelSignConfigurationUpdateRequest(
+                            name: updateSignConfigurationPdfRequestDetails.Name,
+                            ownerPassword: updateSignConfigurationPdfRequestDetails.OwnerPassword,
+                            certificateId: updateSignConfigurationPdfRequestDetails.CertificateId,
+                            privileges: updateSignConfigurationPdfRequestDetails.PdfPrivilege);
+
+            using var signConfigurationDetailsResponse = await client.UpdatePdfSignConfigurationWithHttpMessagesAsync(
+                 this.options.SubscriptionId, updateSignConfigurationPdfRequestDetails.SignConfigurationId, request).ConfigureAwait(false);
+            switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+            {
+                case System.Net.HttpStatusCode.OK:
+                    return signConfigurationDetailsResponse.Body;
+
+                case System.Net.HttpStatusCode.NotFound:
+                    throw new FileSecurityException($"Sign configuration with Id {updateSignConfigurationPdfRequestDetails.SignConfigurationId} not found");
+
+                default:
+                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+            }
+        }
+
+        /// <summary>
         /// Delete certificate.
         /// </summary>
         /// <param name="certificateId">CertificateId.</param>
@@ -128,6 +209,108 @@ namespace Kmd.Logic.FileSecurity.Client
                  certificateId).ConfigureAwait(false))
             {
                 return certificateDetailsResponse.Response;
+            }
+        }
+
+        /// <summary>
+        /// Get sign configuration.
+        /// </summary>
+        /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <returns>SignConfigurationPdfResponse.</returns>
+        public async Task<SignConfigurationPdfResponse> GetPdfSignConfiguration(Guid signConfigurationId)
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationDetailsResponse = await client.GetPdfSignConfigurationWithHttpMessagesAsync(
+                 this.options.SubscriptionId,
+                 signConfigurationId).ConfigureAwait(false))
+            {
+                switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return signConfigurationDetailsResponse.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new FileSecurityException($"Sign Configuration with Id {signConfigurationId} not found");
+
+                    default:
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid sign configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Delete sign configuration.
+        /// </summary>
+        /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <returns>HttpResponseMessage.</returns>
+        public async Task<HttpResponseMessage> DeletePdfSignConfiguration(Guid signConfigurationId)
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationDetailsResponse = await client.DeleteSignConfigurationPdfWithHttpMessagesAsync(
+                 this.options.SubscriptionId,
+                 signConfigurationId).ConfigureAwait(false))
+            {
+                switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.NoContent:
+                        return signConfigurationDetailsResponse.Response;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new FileSecurityException($"Sign Configuration with Id {signConfigurationId} not found");
+
+                    default:
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Response?.ToString() ?? "Invalid sign configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get all sign configuration.
+        /// </summary>
+        /// <returns>List of sign configuration.</returns>
+        public async Task<IEnumerable<SignConfigurationListResponse>> GetAllSignConfiguration()
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationDetailsResponse = await client.GetAllSignConfigurationsWithHttpMessagesAsync(
+                 this.options.SubscriptionId).ConfigureAwait(false))
+            {
+                switch (signConfigurationDetailsResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return signConfigurationDetailsResponse.Body;
+
+                    default:
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get owner password of sign configuration.
+        /// </summary>
+        /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <returns>Owner password.</returns>
+        public async Task<string> GetSignConfigurationOwnerPassword(Guid signConfigurationId)
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationOwnerPasswordResponse = await client.GetSignConfigurationOwnerPasswordWithHttpMessagesAsync(
+                 this.options.SubscriptionId, signConfigurationId).ConfigureAwait(false))
+            {
+                switch (signConfigurationOwnerPasswordResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return signConfigurationOwnerPasswordResponse.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new FileSecurityException($"Sign Configuration Id {signConfigurationId} not found");
+
+                    default:
+                        throw new FileSecurityException(signConfigurationOwnerPasswordResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                }
             }
         }
 

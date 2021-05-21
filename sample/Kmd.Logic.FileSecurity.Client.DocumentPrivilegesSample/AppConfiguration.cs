@@ -1,6 +1,6 @@
 ﻿using Kmd.Logic.Identity.Authorization;
 
-namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
+namespace Kmd.Logic.FileSecurity.Client.DocumentPrivilegesSample
 {
     /// <summary>
     /// Class to get configuration details.
@@ -16,11 +16,6 @@ namespace Kmd.Logic.FileSecurity.Client.ConfigurationSample
         /// Gets or sets filesecurity configuration options.
         /// </summary>
         public FileSecurityOptions FileSecurityOptions { get; set; } = new FileSecurityOptions();
-
-        /// <summary>
-        /// Gets or sets Certificate details.
-        /// </summary>
-        public CertificateDetails CertificateDetails { get; set; } = new CertificateDetails();
 
         /// <summary>
         /// Gets or sets Sign Configuration details.

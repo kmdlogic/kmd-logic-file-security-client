@@ -7,6 +7,8 @@
 namespace Kmd.Logic.FileSecurity.Client
 {
     using Models;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
@@ -16,6 +18,40 @@ namespace Kmd.Logic.FileSecurity.Client
     /// </summary>
     internal static partial class InternalClientExtensions
     {
+            /// <summary>
+            /// Get all certificates managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the certificate.
+            /// </param>
+            public static IList<CertificateListResponse> GetAllCertificates(this IInternalClient operations, System.Guid subscriptionId)
+            {
+                return operations.GetAllCertificatesAsync(subscriptionId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get all certificates managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the certificate.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<CertificateListResponse>> GetAllCertificatesAsync(this IInternalClient operations, System.Guid subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllCertificatesWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
             /// <summary>
             /// Creates/Uploads a certificate for a specific subscription.
             /// </summary>
@@ -189,6 +225,243 @@ namespace Kmd.Logic.FileSecurity.Client
             public static async Task DeleteCertificatesAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid certificateId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.DeleteCertificatesWithHttpMessagesAsync(subscriptionId, certificateId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <summary>
+            /// Get all signconfiguration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            public static IList<SignConfigurationListResponse> GetAllSignConfigurations(this IInternalClient operations, System.Guid subscriptionId)
+            {
+                return operations.GetAllSignConfigurationsAsync(subscriptionId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get all signconfiguration managed by the subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<SignConfigurationListResponse>> GetAllSignConfigurationsAsync(this IInternalClient operations, System.Guid subscriptionId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetAllSignConfigurationsWithHttpMessagesAsync(subscriptionId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get owner password of the requested sign configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of sign configuration to be used.
+            /// </param>
+            public static string GetSignConfigurationOwnerPassword(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId)
+            {
+                return operations.GetSignConfigurationOwnerPasswordAsync(subscriptionId, signConfigurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get owner password of the requested sign configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of sign configuration to be used.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<string> GetSignConfigurationOwnerPasswordAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetSignConfigurationOwnerPasswordWithHttpMessagesAsync(subscriptionId, signConfigurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Creates a signconfiguration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the pdf document privileges and other configuration details
+            /// </param>
+            public static SignConfigurationPdfResponse CreatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateRequest request = default(PdfPrivilegeModelSignConfigurationCreateRequest))
+            {
+                return operations.CreatePdfSignConfigurationAsync(subscriptionId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Creates a signconfiguration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the pdf document privileges and other configuration details
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SignConfigurationPdfResponse> CreatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, PdfPrivilegeModelSignConfigurationCreateRequest request = default(PdfPrivilegeModelSignConfigurationCreateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.CreatePdfSignConfigurationWithHttpMessagesAsync(subscriptionId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Get details of the requested sign configuration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of sign configuration to be used.
+            /// </param>
+            public static SignConfigurationPdfResponse GetPdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId)
+            {
+                return operations.GetPdfSignConfigurationAsync(subscriptionId, signConfigurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get details of the requested sign configuration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of sign configuration to be used.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SignConfigurationPdfResponse> GetPdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetPdfSignConfigurationWithHttpMessagesAsync(subscriptionId, signConfigurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Updates a sign configuration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of the sign configuration.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the pdf document privileges and other configuration details
+            /// </param>
+            public static SignConfigurationPdfResponse UpdatePdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest))
+            {
+                return operations.UpdatePdfSignConfigurationAsync(subscriptionId, signConfigurationId, request).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Updates a sign configuration for pdf document type
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of the sign configuration.
+            /// </param>
+            /// <param name='request'>
+            /// The details of the pdf document privileges and other configuration details
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SignConfigurationPdfResponse> UpdatePdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, PdfPrivilegeModelSignConfigurationUpdateRequest request = default(PdfPrivilegeModelSignConfigurationUpdateRequest), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.UpdatePdfSignConfigurationWithHttpMessagesAsync(subscriptionId, signConfigurationId, request, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Delete requested sign configuration managed by a subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of the sign configuration to delete.
+            /// </param>
+            public static void DeleteSignConfigurationPdf(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId)
+            {
+                operations.DeleteSignConfigurationPdfAsync(subscriptionId, signConfigurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Delete requested sign configuration managed by a subscription.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of the sign configuration to delete.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task DeleteSignConfigurationPdfAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.DeleteSignConfigurationPdfWithHttpMessagesAsync(subscriptionId, signConfigurationId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
     }
