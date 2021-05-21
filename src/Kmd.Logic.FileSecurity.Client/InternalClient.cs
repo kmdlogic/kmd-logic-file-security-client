@@ -1244,7 +1244,7 @@ namespace Kmd.Logic.FileSecurity.Client
             }
             // Construct URL
             var _baseUrl = BaseUri.AbsoluteUri;
-            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/signconfigurations/{signConfigurationId}").ToString();
+            var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/signconfigurations/{signConfigurationId}/ownerpassword").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{signConfigurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(signConfigurationId, SerializationSettings).Trim('"')));
             // Create HTTP transport objects
@@ -1686,11 +1686,11 @@ namespace Kmd.Logic.FileSecurity.Client
 
             // Serialize Request
             string _requestContent = null;
-            if (request != null)
+            if(request != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(request, SerializationSettings);
                 _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
-                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json-patch+json; charset=utf-8");
+                _httpRequest.Content.Headers.ContentType =MediaTypeHeaderValue.Parse("application/json-patch+json; charset=utf-8");
             }
             // Set Credentials
             if (Credentials != null)
@@ -1715,12 +1715,10 @@ namespace Kmd.Logic.FileSecurity.Client
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 401 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                if (_httpResponse.Content != null) 
-                {
+                if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
-                else
-                {
+                else {
                     _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);

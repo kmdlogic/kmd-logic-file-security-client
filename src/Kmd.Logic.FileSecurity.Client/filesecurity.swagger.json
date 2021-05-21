@@ -299,7 +299,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/signconfigurations/{signConfigurationId}": {
+    "/subscriptions/{subscriptionId}/signconfigurations/{signConfigurationId}/ownerpassword": {
       "get": {
         "tags": [
           "SignConfiguration"
