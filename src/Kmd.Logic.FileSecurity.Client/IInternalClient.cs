@@ -147,6 +147,23 @@ namespace Kmd.Logic.FileSecurity.Client
         Task<HttpOperationResponse<IList<SignConfigurationListResponse>>> GetAllSignConfigurationsWithHttpMessagesAsync(System.Guid subscriptionId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
+        /// Get owner password of the requested sign configuration.
+        /// </summary>
+        /// <param name='subscriptionId'>
+        /// The subscription that owns the configurations.
+        /// </param>
+        /// <param name='signConfigurationId'>
+        /// Identifier of sign configuration to be used.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<string>> GetSignConfigurationOwnerPasswordWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <summary>
         /// Creates a signconfiguration for pdf document type
         /// </summary>
         /// <param name='subscriptionId'>

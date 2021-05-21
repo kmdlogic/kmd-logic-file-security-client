@@ -274,16 +274,42 @@ namespace Kmd.Logic.FileSecurity.Client
         {
             var client = this.CreateClient();
 
-            using (var certificateDetailsResponse = await client.GetAllSignConfigurationsWithHttpMessagesAsync(
+            using (var signConfigurationDetailsResponse = await client.GetAllSignConfigurationsWithHttpMessagesAsync(
                  this.options.SubscriptionId).ConfigureAwait(false))
             {
-                switch (certificateDetailsResponse?.Response?.StatusCode)
+                switch (signConfigurationDetailsResponse?.Response?.StatusCode)
                 {
                     case System.Net.HttpStatusCode.OK:
-                        return certificateDetailsResponse.Body;
+                        return signConfigurationDetailsResponse.Body;
 
                     default:
-                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get owner password of sign configuration.
+        /// </summary>
+        /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <returns>Owner password.</returns>
+        public async Task<string> GetSignConfigurationOwnerPassword(Guid signConfigurationId)
+        {
+            var client = this.CreateClient();
+
+            using (var signConfigurationOwnerPasswordResponse = await client.GetSignConfigurationOwnerPasswordWithHttpMessagesAsync(
+                 this.options.SubscriptionId, signConfigurationId).ConfigureAwait(false))
+            {
+                switch (signConfigurationOwnerPasswordResponse?.Response?.StatusCode)
+                {
+                    case System.Net.HttpStatusCode.OK:
+                        return signConfigurationOwnerPasswordResponse.Body;
+
+                    case System.Net.HttpStatusCode.NotFound:
+                        throw new FileSecurityException($"Sign Configuration Id {signConfigurationId} not found");
+
+                    default:
+                        throw new FileSecurityException(signConfigurationOwnerPasswordResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
                 }
             }
         }
