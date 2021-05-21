@@ -1686,7 +1686,7 @@ namespace Kmd.Logic.FileSecurity.Client
 
             // Serialize Request
             string _requestContent = null;
-            if(request != null)
+            if (request != null)
             {
                 _requestContent = SafeJsonConvert.SerializeObject(request, SerializationSettings);
                 _httpRequest.Content = new StringContent(_requestContent, System.Text.Encoding.UTF8);
@@ -1718,7 +1718,8 @@ namespace Kmd.Logic.FileSecurity.Client
                 if (_httpResponse.Content != null) {
                     _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 }
-                else {
+                else
+                {
                     _responseContent = string.Empty;
                 }
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
