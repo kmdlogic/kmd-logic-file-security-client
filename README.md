@@ -14,21 +14,22 @@ add a reference to the [Kmd.Logic.Identity.FileSecurity](https://www.nuget.org/p
 and add a reference to the [Kmd.Logic.Identity.Authorization](https://www.nuget.org/packages/Kmd.Logic.Identity.Authorization) nuget package.
 
 
-## FileSecurityClient certificate
+## FileSecurityClient
 
-The Logic FileSecurityClient provides APIs for:
-
-* Get a certificate;
-* Get all certificates;
-* Create a certificate;
-* Update a certificate;
-* Delete a certificate;
-* Create a sign configuration;
-* Get a sign configuration;
-* Get sign configuration owner password;
-* Get all sign configuration;
-* Update a sign configuration;
-* Delete a sign configuration;
+The Logic FileSecurityClient provides:
+* Certificate API's 
+  * Get a certificate;
+  * Get all certificates;
+  * Create a certificate;
+  * Update a certificate;
+  * Delete a certificate;
+* Configuration API's
+  * Create a sign configuration;
+  * Get a sign configuration;
+  * Get sign configuration owner password;
+  * Get all sign configuration;
+  * Update a sign configuration;
+  * Delete a sign configuration;
 
 ## How to configure the File Security client
 
