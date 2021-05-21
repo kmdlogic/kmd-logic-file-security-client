@@ -262,6 +262,46 @@ namespace Kmd.Logic.FileSecurity.Client
             }
 
             /// <summary>
+            /// Get owner password of the requested sign configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of sign configuration to be used.
+            /// </param>
+            public static string GetSignConfigurationOwnerPassword(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId)
+            {
+                return operations.GetSignConfigurationOwnerPasswordAsync(subscriptionId, signConfigurationId).GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get owner password of the requested sign configuration.
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='subscriptionId'>
+            /// The subscription that owns the configurations.
+            /// </param>
+            /// <param name='signConfigurationId'>
+            /// Identifier of sign configuration to be used.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<string> GetSignConfigurationOwnerPasswordAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetSignConfigurationOwnerPasswordWithHttpMessagesAsync(subscriptionId, signConfigurationId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Creates a signconfiguration for pdf document type
             /// </summary>
             /// <param name='operations'>
