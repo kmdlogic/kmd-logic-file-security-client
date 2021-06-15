@@ -192,7 +192,6 @@
           {
             "name": "certificate",
             "in": "formData",
-            "required": true,
             "type": "file"
           },
           {
@@ -249,8 +248,8 @@
           "204": {
             "description": "Success"
           },
-          "404": {
-            "description": "Not Found"
+          "400": {
+            "description": "Bad Request"
           }
         },
         "security": [
@@ -594,6 +593,9 @@
         },
         "createdDate": {
           "format": "date-time",
+          "type": "string"
+        },
+        "certificateFileName": {
           "type": "string"
         }
       }

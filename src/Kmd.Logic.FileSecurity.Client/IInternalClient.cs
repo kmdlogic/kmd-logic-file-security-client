@@ -113,7 +113,7 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<CertificateResponse>> UpdateCertificatesWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid certificateId, string name, Stream certificate, string certificatePassword = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<CertificateResponse>> UpdateCertificatesWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid certificateId, string name, Stream certificate = default(Stream), string certificatePassword = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Delete requested certificate managed by a subscrition.
