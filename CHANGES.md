@@ -1,3 +1,7 @@
+1.1.1
+* Added certificate file name in the response
+* Change in error response code for Delete Sign configuration
+
 1.1.0
 * Added SignConfiguration management operations
 
