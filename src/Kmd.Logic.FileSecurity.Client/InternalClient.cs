@@ -801,15 +801,11 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<CertificateResponse>> UpdateCertificatesWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid certificateId, string name, Stream certificate, string certificatePassword = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<CertificateResponse>> UpdateCertificatesWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid certificateId, string name, Stream certificate = default(Stream), string certificatePassword = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (name == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "name");
-            }
-            if (certificate == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "certificate");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1040,7 +1036,7 @@ namespace Kmd.Logic.FileSecurity.Client
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
             string _responseContent = null;
-            if ((int)_statusCode != 204 && (int)_statusCode != 404)
+            if ((int)_statusCode != 204 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 if (_httpResponse.Content != null) {

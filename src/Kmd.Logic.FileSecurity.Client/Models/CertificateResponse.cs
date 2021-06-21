@@ -22,12 +22,13 @@ namespace Kmd.Logic.FileSecurity.Client.Models
         /// <summary>
         /// Initializes a new instance of the CertificateResponse class.
         /// </summary>
-        public CertificateResponse(System.Guid? certificateId = default(System.Guid?), string name = default(string), System.Guid? subscriptionId = default(System.Guid?), System.DateTime? createdDate = default(System.DateTime?))
+        public CertificateResponse(System.Guid? certificateId = default(System.Guid?), string name = default(string), System.Guid? subscriptionId = default(System.Guid?), System.DateTime? createdDate = default(System.DateTime?), string certificateFileName = default(string))
         {
             CertificateId = certificateId;
             Name = name;
             SubscriptionId = subscriptionId;
             CreatedDate = createdDate;
+            CertificateFileName = certificateFileName;
             CustomInit();
         }
 
@@ -55,6 +56,11 @@ namespace Kmd.Logic.FileSecurity.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "createdDate")]
         public System.DateTime? CreatedDate { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "certificateFileName")]
+        public string CertificateFileName { get; set; }
 
     }
 }
