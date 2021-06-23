@@ -1,4 +1,4 @@
-1.1.1
+1.1.2
 * Changed to .netstandard2.1
 
 1.1.1
