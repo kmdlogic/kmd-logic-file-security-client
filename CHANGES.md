@@ -1,4 +1,7 @@
 1.1.1
+* Changed to .netstandard2.1
+
+1.1.1
 * Added certificate file name in the response
 * Change in error response code for Delete Sign configuration
 
