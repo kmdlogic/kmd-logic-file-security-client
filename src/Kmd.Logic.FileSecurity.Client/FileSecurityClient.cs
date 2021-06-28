@@ -27,16 +27,29 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <param name="httpClient">The HTTP client to use. The caller is expected to manage this resource and it will not be disposed.</param>
         /// <param name="tokenProviderFactory">The Logic access token provider factory.</param>
         /// <param name="options">The required configuration options.</param>
-        /// <param name="bearerToken">This is required to get certificate from File Security</param>
         public FileSecurityClient(
             HttpClient httpClient,
             ITokenProviderFactory tokenProviderFactory,
-            FileSecurityOptions options,
-            string bearerToken = "")
+            FileSecurityOptions options)
         {
             this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.tokenProviderFactory = tokenProviderFactory ?? throw new ArgumentNullException(nameof(tokenProviderFactory));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSecurityClient"/> class using bearer token.
+        /// </summary>
+        /// <param name="httpClient">The HTTP client to use. The caller is expected to manage this resource and it will not be disposed.</param>
+        /// <param name="options">The required configuration options.</param>
+        /// <param name="bearerToken">This is required to get certificate from File Security.</param>
+        public FileSecurityClient(
+           HttpClient httpClient,
+           string bearerToken,
+           FileSecurityOptions options)
+        {
+            this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.bearerToken = bearerToken ?? throw new ArgumentNullException(nameof(bearerToken));
         }
 
