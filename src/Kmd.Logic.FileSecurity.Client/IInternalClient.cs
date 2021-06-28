@@ -191,13 +191,16 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <param name='signConfigurationId'>
         /// Identifier of sign configuration to be used.
         /// </param>
+        /// <param name='requireCertificate'>
+        /// If true, will return the certificate
+        /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SignConfigurationPdfResponse>> GetPdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<SignConfigurationPdfResponse>> GetPdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, bool? requireCertificate = false, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Updates a sign configuration for pdf document type
