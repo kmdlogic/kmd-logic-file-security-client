@@ -42,7 +42,7 @@ namespace Kmd.Logic.FileSecurity.Client
         /// </summary>
         /// <param name="httpClient">The HTTP client to use. The caller is expected to manage this resource and it will not be disposed.</param>
         /// <param name="options">The required configuration options.</param>
-        /// <param name="bearerToken">This is required to get certificate from File Security.</param>
+        /// <param name="bearerToken">Required access token to authenticate with File Security module.</param>
         public FileSecurityClient(
            HttpClient httpClient,
            string bearerToken,
@@ -361,7 +361,7 @@ namespace Kmd.Logic.FileSecurity.Client
                 credentials = new TokenCredentials(this.bearerToken);
                 this.internalClient = new InternalClient(credentials)
                 {
-                    BaseUri = this.options.FileSecurityServiceUri,
+                    BaseUri = this.options.FileSecurityServiceUri
                 };
             }
             else
