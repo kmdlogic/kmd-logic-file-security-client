@@ -434,6 +434,13 @@
             "required": true,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "name": "requireCertificate",
+            "in": "query",
+            "description": "If true, will return the certificate",
+            "type": "boolean",
+            "default": false
           }
         ],
         "responses": {
@@ -701,6 +708,9 @@
         },
         "pdfPrivilege": {
           "$ref": "#/definitions/PdfPrivilegeModel"
+        },
+        "certificateRawData": {
+          "type": "string"
         }
       }
     },

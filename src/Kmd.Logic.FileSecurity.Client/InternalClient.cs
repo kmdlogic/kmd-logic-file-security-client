@@ -1486,6 +1486,9 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <param name='signConfigurationId'>
         /// Identifier of sign configuration to be used.
         /// </param>
+        /// <param name='requireCertificate'>
+        /// If true, will return the certificate
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
@@ -1501,7 +1504,7 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<SignConfigurationPdfResponse>> GetPdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<SignConfigurationPdfResponse>> GetPdfSignConfigurationWithHttpMessagesAsync(System.Guid subscriptionId, System.Guid signConfigurationId, bool? requireCertificate = false, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1512,6 +1515,7 @@ namespace Kmd.Logic.FileSecurity.Client
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("subscriptionId", subscriptionId);
                 tracingParameters.Add("signConfigurationId", signConfigurationId);
+                tracingParameters.Add("requireCertificate", requireCertificate);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetPdfSignConfiguration", tracingParameters);
             }
@@ -1520,6 +1524,15 @@ namespace Kmd.Logic.FileSecurity.Client
             var _url = new System.Uri(new System.Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/signconfigurations/pdf/{signConfigurationId}").ToString();
             _url = _url.Replace("{subscriptionId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, SerializationSettings).Trim('"')));
             _url = _url.Replace("{signConfigurationId}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(signConfigurationId, SerializationSettings).Trim('"')));
+            List<string> _queryParameters = new List<string>();
+            if (requireCertificate != null)
+            {
+                _queryParameters.Add(string.Format("requireCertificate={0}", System.Uri.EscapeDataString(SafeJsonConvert.SerializeObject(requireCertificate, SerializationSettings).Trim('"'))));
+            }
+            if (_queryParameters.Count > 0)
+            {
+                _url += "?" + string.Join("&", _queryParameters);
+            }
             // Create HTTP transport objects
             var _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

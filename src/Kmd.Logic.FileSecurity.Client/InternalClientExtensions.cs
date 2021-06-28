@@ -353,9 +353,12 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='signConfigurationId'>
             /// Identifier of sign configuration to be used.
             /// </param>
-            public static SignConfigurationPdfResponse GetPdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId)
+            /// <param name='requireCertificate'>
+            /// If true, will return the certificate
+            /// </param>
+            public static SignConfigurationPdfResponse GetPdfSignConfiguration(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, bool? requireCertificate = false)
             {
-                return operations.GetPdfSignConfigurationAsync(subscriptionId, signConfigurationId).GetAwaiter().GetResult();
+                return operations.GetPdfSignConfigurationAsync(subscriptionId, signConfigurationId, requireCertificate).GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -370,12 +373,15 @@ namespace Kmd.Logic.FileSecurity.Client
             /// <param name='signConfigurationId'>
             /// Identifier of sign configuration to be used.
             /// </param>
+            /// <param name='requireCertificate'>
+            /// If true, will return the certificate
+            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SignConfigurationPdfResponse> GetPdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SignConfigurationPdfResponse> GetPdfSignConfigurationAsync(this IInternalClient operations, System.Guid subscriptionId, System.Guid signConfigurationId, bool? requireCertificate = false, CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetPdfSignConfigurationWithHttpMessagesAsync(subscriptionId, signConfigurationId, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetPdfSignConfigurationWithHttpMessagesAsync(subscriptionId, signConfigurationId, requireCertificate, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }
