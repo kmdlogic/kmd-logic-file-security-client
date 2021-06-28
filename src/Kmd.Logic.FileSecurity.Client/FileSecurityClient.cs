@@ -361,7 +361,7 @@ namespace Kmd.Logic.FileSecurity.Client
                 credentials = new TokenCredentials(this.bearerToken);
                 this.internalClient = new InternalClient(credentials)
                 {
-                    BaseUri = this.options.FileSecurityServiceUri
+                    BaseUri = this.options.FileSecurityServiceUri,
                 };
             }
             else
