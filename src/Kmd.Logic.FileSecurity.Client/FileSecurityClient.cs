@@ -236,14 +236,18 @@ namespace Kmd.Logic.FileSecurity.Client
         /// Get sign configuration.
         /// </summary>
         /// <param name="signConfigurationId">SignConfigurationID.</param>
+        /// <param name="requireCertificate">This value will indicate whether to fetch certificate or not.</param>
         /// <returns>SignConfigurationPdfResponse.</returns>
-        public async Task<SignConfigurationPdfResponse> GetPdfSignConfiguration(Guid signConfigurationId)
+        public async Task<SignConfigurationPdfResponse> GetPdfSignConfiguration(
+            Guid signConfigurationId,
+            bool? requireCertificate = default(bool))
         {
             var client = this.CreateClient();
 
             using (var signConfigurationDetailsResponse = await client.GetPdfSignConfigurationWithHttpMessagesAsync(
                  this.options.SubscriptionId,
-                 signConfigurationId).ConfigureAwait(false))
+                 signConfigurationId,
+                 requireCertificate).ConfigureAwait(false))
             {
                 switch (signConfigurationDetailsResponse?.Response?.StatusCode)
                 {
