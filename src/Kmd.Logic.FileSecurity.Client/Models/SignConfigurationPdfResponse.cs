@@ -24,7 +24,7 @@ namespace Kmd.Logic.FileSecurity.Client.Models
         /// Initializes a new instance of the SignConfigurationPdfResponse
         /// class.
         /// </summary>
-        public SignConfigurationPdfResponse(System.Guid? id = default(System.Guid?), string name = default(string), System.Guid? certificateId = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), System.DateTime? createdDate = default(System.DateTime?), PdfPrivilegeModel pdfPrivilege = default(PdfPrivilegeModel))
+        public SignConfigurationPdfResponse(System.Guid? id = default(System.Guid?), string name = default(string), System.Guid? certificateId = default(System.Guid?), System.Guid? subscriptionId = default(System.Guid?), System.DateTime? createdDate = default(System.DateTime?), PdfPrivilegeModel pdfPrivilege = default(PdfPrivilegeModel), string certificateRawData = default(string))
         {
             Id = id;
             Name = name;
@@ -32,6 +32,7 @@ namespace Kmd.Logic.FileSecurity.Client.Models
             SubscriptionId = subscriptionId;
             CreatedDate = createdDate;
             PdfPrivilege = pdfPrivilege;
+            CertificateRawData = certificateRawData;
             CustomInit();
         }
 
@@ -69,6 +70,11 @@ namespace Kmd.Logic.FileSecurity.Client.Models
         /// </summary>
         [JsonProperty(PropertyName = "pdfPrivilege")]
         public PdfPrivilegeModel PdfPrivilege { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "certificateRawData")]
+        public string CertificateRawData { get; set; }
 
     }
 }

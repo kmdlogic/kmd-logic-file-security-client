@@ -19,6 +19,7 @@ namespace Kmd.Logic.FileSecurity.Client
         private readonly FileSecurityOptions options;
         private readonly ITokenProviderFactory tokenProviderFactory;
         private InternalClient internalClient;
+        private string bearerToken;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileSecurityClient"/> class.
@@ -26,11 +27,30 @@ namespace Kmd.Logic.FileSecurity.Client
         /// <param name="httpClient">The HTTP client to use. The caller is expected to manage this resource and it will not be disposed.</param>
         /// <param name="tokenProviderFactory">The Logic access token provider factory.</param>
         /// <param name="options">The required configuration options.</param>
-        public FileSecurityClient(HttpClient httpClient, ITokenProviderFactory tokenProviderFactory, FileSecurityOptions options)
+        public FileSecurityClient(
+            HttpClient httpClient,
+            ITokenProviderFactory tokenProviderFactory,
+            FileSecurityOptions options)
         {
             this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             this.options = options ?? throw new ArgumentNullException(nameof(options));
             this.tokenProviderFactory = tokenProviderFactory ?? throw new ArgumentNullException(nameof(tokenProviderFactory));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FileSecurityClient"/> class using bearer token.
+        /// </summary>
+        /// <param name="httpClient">The HTTP client to use. The caller is expected to manage this resource and it will not be disposed.</param>
+        /// <param name="options">The required configuration options.</param>
+        /// <param name="bearerToken">Required access token to authenticate with File Security module.</param>
+        public FileSecurityClient(
+           HttpClient httpClient,
+           string bearerToken,
+           FileSecurityOptions options)
+        {
+            this.httpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
+            this.options = options ?? throw new ArgumentNullException(nameof(options));
+            this.bearerToken = bearerToken ?? throw new ArgumentNullException(nameof(bearerToken));
         }
 
         /// <summary>
@@ -335,12 +355,23 @@ namespace Kmd.Logic.FileSecurity.Client
                 return this.internalClient;
             }
 
-            var tokenProvider = this.tokenProviderFactory.GetProvider(this.httpClient);
-
-            this.internalClient = new InternalClient(new TokenCredentials(tokenProvider))
+            TokenCredentials credentials;
+            if (!string.IsNullOrEmpty(this.bearerToken))
             {
-                BaseUri = this.options.FileSecurityServiceUri,
-            };
+                credentials = new TokenCredentials(this.bearerToken);
+                this.internalClient = new InternalClient(credentials)
+                {
+                    BaseUri = this.options.FileSecurityServiceUri,
+                };
+            }
+            else
+            {
+                var tokenProvider = this.tokenProviderFactory.GetProvider(this.httpClient);
+                this.internalClient = new InternalClient(new TokenCredentials(tokenProvider))
+                {
+                    BaseUri = this.options.FileSecurityServiceUri,
+                };
+            }
 
             return this.internalClient;
         }
