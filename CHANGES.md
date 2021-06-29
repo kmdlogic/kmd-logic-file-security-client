@@ -1,3 +1,7 @@
+1.1.3
+* Include certificate in Sign config privilege response
+* Option to accept bearer token for authentication in client
+
 1.1.2
 * Changed to .netstandard2.1
 
