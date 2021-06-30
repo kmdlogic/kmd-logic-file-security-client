@@ -1,3 +1,6 @@
+1.1.4
+* Pass optional token param to get privileges
+
 1.1.3
 * Include certificate in Sign config privilege response
 * Option to accept bearer token for authentication in client
