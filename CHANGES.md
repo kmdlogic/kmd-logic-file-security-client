@@ -1,3 +1,6 @@
+1.1.5
+* Return meaningful error message
+
 1.1.4
 * Pass optional token param to get privileges
 
