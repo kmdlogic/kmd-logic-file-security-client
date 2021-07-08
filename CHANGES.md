@@ -2,7 +2,7 @@
 * Return meaningful error message
 
 1.1.4
-* Pass optional token param to get privileges
+* Pass optional param to get certificate from privileges api
 
 1.1.3
 * Include certificate in Sign config privilege response
