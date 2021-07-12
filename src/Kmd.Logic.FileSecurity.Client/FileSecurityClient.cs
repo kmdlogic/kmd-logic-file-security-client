@@ -76,7 +76,7 @@ namespace Kmd.Logic.FileSecurity.Client
                     return null;
 
                 default:
-                    throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                    throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
             }
         }
 
@@ -104,7 +104,7 @@ namespace Kmd.Logic.FileSecurity.Client
                     throw new FileSecurityException($"Certificate with Id {updateCertificateRequestDetails.Id} not found");
 
                 default:
-                    throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                    throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
             }
         }
 
@@ -130,7 +130,7 @@ namespace Kmd.Logic.FileSecurity.Client
                         throw new FileSecurityException($"Certificate with Id {certificateId} not found");
 
                     default:
-                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
                 }
             }
         }
@@ -152,7 +152,7 @@ namespace Kmd.Logic.FileSecurity.Client
                         return certificateDetailsResponse.Body;
 
                     default:
-                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                        throw new FileSecurityException(certificateDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
                 }
             }
         }
@@ -182,7 +182,7 @@ namespace Kmd.Logic.FileSecurity.Client
                     return null;
 
                 default:
-                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
             }
         }
 
@@ -211,7 +211,7 @@ namespace Kmd.Logic.FileSecurity.Client
                     throw new FileSecurityException($"Sign configuration with Id {updateSignConfigurationPdfRequestDetails.SignConfigurationId} not found");
 
                 default:
-                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                    throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
             }
         }
 
@@ -258,7 +258,7 @@ namespace Kmd.Logic.FileSecurity.Client
                         throw new FileSecurityException($"Sign Configuration with Id {signConfigurationId} not found");
 
                     default:
-                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid sign configuration provided to access File Security service");
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
                 }
             }
         }
@@ -285,7 +285,7 @@ namespace Kmd.Logic.FileSecurity.Client
                         throw new FileSecurityException($"Sign Configuration with Id {signConfigurationId} not found");
 
                     default:
-                        throw new FileSecurityException(signConfigurationDetailsResponse?.Response?.ToString() ?? "Invalid sign configuration provided to access File Security service");
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Response?.ToString() ?? "Error accessing File Security service.");
                 }
             }
         }
@@ -307,7 +307,7 @@ namespace Kmd.Logic.FileSecurity.Client
                         return signConfigurationDetailsResponse.Body;
 
                     default:
-                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                        throw new FileSecurityException(signConfigurationDetailsResponse?.Body?.ToString() ?? "Error accessing File Security service.");
                 }
             }
         }
@@ -333,7 +333,7 @@ namespace Kmd.Logic.FileSecurity.Client
                         throw new FileSecurityException($"Sign Configuration Id {signConfigurationId} not found");
 
                     default:
-                        throw new FileSecurityException(signConfigurationOwnerPasswordResponse?.Body?.ToString() ?? "Invalid configuration provided to access File Security service");
+                        throw new FileSecurityException(signConfigurationOwnerPasswordResponse?.Body?.ToString() ?? "Error accessing File Security service.");
                 }
             }
         }
